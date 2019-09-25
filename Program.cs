@@ -6,32 +6,26 @@ class Program
 {
     static void Main()
     {
-        Board newBoard = new Board(50,100);
+        Board newBoard = new Board(100,50);
         newBoard.MakeBoard();
-        newBoard.StartCaterpillarCoords(49,99);
         newBoard.PrintBoard();
         DrawBoard(newBoard, "w");
         // program code goes here
     }
 
     public static void DrawBoard(Board board, string prevDirection){
-        Stopwatch timer = new Stopwatch();
-        timer.Start();
-        bool elapsedTimer = false;
-        string direction = "w";
-        while(timer.ElapsedMilliseconds < 2000 && elapsedTimer == false){
-            if(timer.ElapsedMilliseconds > 2000){
-                elapsedTimer = true;
-            }
+        string direction = prevDirection;
+        Console.WriteLine(Console.KeyAvailable);
+        if(!Console.KeyAvailable){
+            Console.WriteLine("if");
             var directionKey = Console.ReadKey(true);
             direction = directionKey.KeyChar.ToString();
-            board.Move(direction);
             prevDirection = direction;
         }
-        if(elapsedTimer){
-            board.Move(prevDirection);
-        }
+        board.Move(direction);
+        board.MakeBoard();
         board.PrintBoard();
+        Thread.Sleep(200);
         DrawBoard(board, prevDirection);
     }
 

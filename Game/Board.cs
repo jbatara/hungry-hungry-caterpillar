@@ -11,25 +11,20 @@ namespace Game
         public Board(int x, int y){
             BoardSize_X = x;
             BoardSize_Y = y;
-            GameBoard = new char[BoardSize_X,BoardSize_Y];
-        }
-
-        public void StartCaterpillarCoords(int x, int y){
-            CaterpillarCoords = new int[]{x,y};
-            GameBoard[x,y] = '\u0c67';
+            GameBoard = new char[BoardSize_Y,BoardSize_X];
+            CaterpillarCoords = new int[]{49,99};
         }
 
         public char[,] MakeBoard(){
-            for (int row = 0; row < BoardSize_X; row++)
+            for (int row = 0; row < BoardSize_Y; row++)
             {
-                for (int col = 0; col < BoardSize_Y; col++)
+                for (int col = 0; col < BoardSize_X; col++)
                 {
-                    if (col == CaterpillarCoords[0] && row == CaterpillarCoords[1])
+                    if (col == CaterpillarCoords[1] && row == CaterpillarCoords[0])
                     {
                         GameBoard[row, col] = '\u0c67';
                     } else {
-                    GameBoard[row, col] = '\u2591';
-
+                        GameBoard[row, col] = '\u2591';
                     }
                 }
             }
@@ -49,18 +44,18 @@ namespace Game
         }
 
         public void Move(string directionLetter){
-            int x = CaterpillarCoords[0];
-            int y = CaterpillarCoords[1];
+            int x = CaterpillarCoords[1];
+            int y = CaterpillarCoords[0];
             if(directionLetter == "a"){
-                CaterpillarCoords[0] = (x - 1) % BoardSize_Y;
+                CaterpillarCoords[1] = (x - 1) > 0 ? (x - 1) % BoardSize_X : ((x - 1) % BoardSize_X)+BoardSize_X;
             } else if (directionLetter == "s"){
-                CaterpillarCoords[1] = (y - 1) % BoardSize_X;
+                CaterpillarCoords[0] = (y + 1) % BoardSize_Y;
             } else if (directionLetter == "d"){
-                CaterpillarCoords[0] = (x + 1) % BoardSize_Y;
+                CaterpillarCoords[1] = (x + 1) % BoardSize_X;
             } else if (directionLetter == "w"){
-                CaterpillarCoords[1] = (y + 1) % BoardSize_X;
+                CaterpillarCoords[0] = (y - 1) > 0 ? (y - 1) % BoardSize_Y : ((y - 1) % BoardSize_Y) + BoardSize_Y;
             }
-
+            Console.WriteLine("x " + x + ", y " + y);
         }
     }
 }
