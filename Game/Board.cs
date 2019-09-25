@@ -55,7 +55,6 @@ namespace Game
             } else if (directionLetter == "w"){
                 CaterpillarCoords[0] = (y - 1) > 0 ? (y - 1) % BoardSize_Y : ((y - 1) % BoardSize_Y) + BoardSize_Y;
             }
-            Console.WriteLine("x " + x + ", y " + y);
         }
     }
 }

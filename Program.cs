@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Threading;
 using Game;
 class Program
@@ -13,20 +12,21 @@ class Program
         // program code goes here
     }
 
-    public static void DrawBoard(Board board, string prevDirection){
-        string direction = prevDirection;
-        Console.WriteLine(Console.KeyAvailable);
-        if(!Console.KeyAvailable){
-            Console.WriteLine("if");
-            var directionKey = Console.ReadKey(true);
-            direction = directionKey.KeyChar.ToString();
-            prevDirection = direction;
+    public static void DrawBoard(Board board, string direction){
+        while(!Console.KeyAvailable){
+            board.Move(direction);
+            board.MakeBoard();
+            board.PrintBoard();
+            Thread.Sleep(200);
+            DrawBoard(board, direction);
         }
+        var directionKey = Console.ReadKey(true);
+        direction = directionKey.KeyChar.ToString();
         board.Move(direction);
         board.MakeBoard();
         board.PrintBoard();
         Thread.Sleep(200);
-        DrawBoard(board, prevDirection);
+        DrawBoard(board, direction);
     }
 
 
