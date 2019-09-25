@@ -17,7 +17,7 @@ class Program
             board.Move(direction);
             board.MakeBoard();
             board.PrintBoard();
-            Thread.Sleep(200);
+            Thread.Sleep(100);
             DrawBoard(board, direction);
         }
         var directionKey = Console.ReadKey(true);
@@ -25,7 +25,7 @@ class Program
         board.Move(direction);
         board.MakeBoard();
         board.PrintBoard();
-        Thread.Sleep(200);
+        Thread.Sleep(100);
         DrawBoard(board, direction);
     }
 
