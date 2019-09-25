@@ -24,7 +24,13 @@ namespace Game
             {
                 for (int col = 0; col < BoardSize_Y; col++)
                 {
+                    if (col == CaterpillarCoords[0] && row == CaterpillarCoords[1])
+                    {
+                        GameBoard[row, col] = '\u0c67';
+                    } else {
                     GameBoard[row, col] = '\u2591';
+
+                    }
                 }
             }
             return GameBoard;
@@ -38,6 +44,8 @@ namespace Game
                 }
                 Console.WriteLine(line);
             }
+            Console.WriteLine("");
+            Console.WriteLine("");
         }
 
         public void Move(string directionLetter){
@@ -52,6 +60,7 @@ namespace Game
             } else if (directionLetter == "w"){
                 CaterpillarCoords[1] = (y + 1) % BoardSize_X;
             }
+
         }
     }
 }
