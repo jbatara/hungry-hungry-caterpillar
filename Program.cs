@@ -13,20 +13,26 @@ class Program
     }
 
     public static void DrawBoard(Board board, string direction){
-        while(!Console.KeyAvailable){
+        bool gameOver = board.IsCannibal();
+        if(!gameOver){
+            while(!Console.KeyAvailable){
+                board.Move(direction);
+                board.MakeBoard();
+                board.PrintBoard();
+                Thread.Sleep(100);
+                DrawBoard(board, direction);
+            }
+            var directionKey = Console.ReadKey(true);
+            direction = directionKey.KeyChar.ToString();
             board.Move(direction);
             board.MakeBoard();
             board.PrintBoard();
             Thread.Sleep(100);
             DrawBoard(board, direction);
+        } else {
+            Console.WriteLine("Game Over!");
+            System.Environment.Exit(1);
         }
-        var directionKey = Console.ReadKey(true);
-        direction = directionKey.KeyChar.ToString();
-        board.Move(direction);
-        board.MakeBoard();
-        board.PrintBoard();
-        Thread.Sleep(100);
-        DrawBoard(board, direction);
     }
 
 

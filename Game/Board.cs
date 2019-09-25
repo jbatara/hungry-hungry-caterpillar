@@ -127,6 +127,21 @@ namespace Game
             return isEaten;
         }
 
+        public bool IsCannibal()
+        {
+            bool isCannibal = false;
+            List<int[]> bodyCoords = new List<int[]>();
+            for(int i = 1; i < CaterpillarCoords.Count; i++){
+                if(CaterpillarCoords[i][0] == CaterpillarCoords[0][0] && CaterpillarCoords[i][1] == CaterpillarCoords[0][1]){
+                    Console.WriteLine("Check if Cannibal!");
+                    isCannibal = true;
+
+                }
+            }
+            
+            return isCannibal;
+        }
+
         public void GrowCaterpillar(){
             int[] lastCoord = CaterpillarCoords[CaterpillarCoords.Count-1];
             int x = lastCoord[1];
