@@ -93,21 +93,21 @@ namespace Game
         }
 
         public void Move(string directionLetter){
-            for(int i = 0; i < CaterpillarCoords.Count; i++){
-                int x = CaterpillarCoords[i][1];
-                int y = CaterpillarCoords[i][0];
-                if(directionLetter == "a"){
-                    CaterpillarCoords[i][1] = (x - 1) >= 0 ? (x - 1) % BoardSize_X : (x - 1)+BoardSize_X;
-                } else if (directionLetter == "s"){
-                    CaterpillarCoords[i][0] = (y + 1) % BoardSize_Y;
-                } else if (directionLetter == "d"){
-                    CaterpillarCoords[i][1] = (x + 1) % BoardSize_X;
-                } else if (directionLetter == "w"){
-                    CaterpillarCoords[i][0] = (y - 1) >= 0 ? (y - 1) % BoardSize_Y : (y - 1) + BoardSize_Y;
-                }
-            }
-            Direction = directionLetter;
             GrowCaterpillar();
+            int x = CaterpillarCoords[0][1];
+            int y = CaterpillarCoords[0][0];
+            if(directionLetter == "a"){
+                CaterpillarCoords[0][1] = (x - 1) >= 0 ? (x - 1) % BoardSize_X : (x - 1)+BoardSize_X;
+            } else if (directionLetter == "s"){
+                CaterpillarCoords[0][0] = (y + 1) % BoardSize_Y;
+            } else if (directionLetter == "d"){
+                CaterpillarCoords[0][1] = (x + 1) % BoardSize_X;
+            } else if (directionLetter == "w"){
+                CaterpillarCoords[0][0] = (y - 1) >= 0 ? (y - 1) % BoardSize_Y : (y - 1) + BoardSize_Y;
+            }
+            CaterpillarCoords.Insert(1,new int[]{y,x});
+            CaterpillarCoords.Remove(CaterpillarCoords[CaterpillarCoords.Count-1]);
+            Direction = directionLetter;
         }
 
         public bool IsFoodEaten(){
